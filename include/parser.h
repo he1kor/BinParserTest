@@ -56,7 +56,7 @@ struct TargetMessagePOD{
     uint8_t carWidth_DM;
 
     void print() const;
-    static std::expected<TargetMessagePOD, ParseError> fromBytes(std::span<const std::byte> data);
+    static std::expected<TargetMessagePOD, ParseError> fromBytes(std::span<const std::byte>& data);
 };
 #pragma pack(pop)
 static_assert(sizeof(TargetMessagePOD) == 29);

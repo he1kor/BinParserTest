@@ -102,7 +102,7 @@ void TargetMessagePOD::print() const{
     printLine("Car width:", +carWidth_DM);
 }
 
-std::expected<TargetMessagePOD, ParseError> TargetMessagePOD::fromBytes(std::span<const std::byte> data){
+std::expected<TargetMessagePOD, ParseError> TargetMessagePOD::fromBytes(std::span<const std::byte>& data){
     if (data.size_bytes() < sizeof(TargetMessagePOD))
         return std::unexpected(ParseError::dataSizeMismatch);
     TargetMessagePOD result;
