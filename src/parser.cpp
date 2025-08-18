@@ -84,22 +84,25 @@ void TargetMessagePOD::print() const{
     auto printLine = [](const std::string& label, auto value) {
         std::cout << std::format("{:<30}\t{}\n", label, value);
     };
+    auto printBinLine = [](const std::string& label, auto value) {
+        std::cout << std::format("{:<30}\t{:08b}\n", label, value);
+    };
     printLine("Goal numbering:", +goalNumbering);
-    printLine("Vertical distance:", verticalDistance_DM);
-    printLine("Lateral distance:", lateralDistance_DM);
-    printLine("Speed (y direction):", speedY_DM);
+    printLine("Vertical distance:", static_cast<float>(verticalDistance_DM)/10);
+    printLine("Lateral distance:", static_cast<float>(lateralDistance_DM)/10);
+    printLine("Speed (y direction):", static_cast<float>(speedY_DM)/10);
     printLine("Target Type:", +targetType);
     printLine("Lane Number:", +laneNumber);
-    printLine("Front spacing:", frontSpacing_DM);
-    printLine("Front time interval:", frontTimeInterval_DM);
-    printLine("Speed (x direction):", speedX_DM);
-    printLine("Heading angle:", angle_360);
-    printLine("Incidents:", +incidents_bitset);
-    printLine("Radar Network X-sit Standard:", radarNetworkXSit_DM);
-    printLine("Radar Network Y-sit Standard:", radarNetworkYSit_DM);
+    printLine("Front spacing:", static_cast<float>(frontSpacing_DM)/10);
+    printLine("Front time interval:", static_cast<float>(frontTimeInterval_DM)/10);
+    printLine("Speed (x direction):", static_cast<float>(speedX_DM)/10);
+    printLine("Heading angle:", static_cast<float>(angle_360)/100);
+    printBinLine("Incidents:", +incidents_bitset);
+    printLine("Radar Network X-sit Standard:", static_cast<double>(radarNetworkXSit_DM)/10);
+    printLine("Radar Network Y-sit Standard:", static_cast<double>(radarNetworkYSit_DM)/10);
     printLine("Fill the blind mark:", +fillTheBlindMark);
-    printLine("Car length:", +carLength_DM);
-    printLine("Car width:", +carWidth_DM);
+    printLine("Car length:", +static_cast<float>(carLength_DM)/10);
+    printLine("Car width:", +static_cast<float>(carWidth_DM)/10);
 }
 
 std::expected<TargetMessagePOD, ParseError> TargetMessagePOD::fromBytes(std::span<const std::byte>& data){
